@@ -3,9 +3,9 @@ import "./styles.css";
 
 export default function App() {
   const [data, setData] = React.useState();
-  // const [posts, setPosts] = React.useState({});
+  const [specificUsers, setSpecificUsers] = React.useState();
 
-  const loadData = () => {
+  const loadData = (userIds = []) => {
     const urls = [
       "https://jsonplaceholder.typicode.com/users",
       "https://jsonplaceholder.typicode.com/posts"
@@ -19,8 +19,18 @@ export default function App() {
             return posts.userId === user.id;
           });
         });
+        // setData(Object.assign({}, (result[0])));
         setData(result[0]);
-        // console.log(result[0]);
+        console.log(data);
+
+        // const users = data.filter((user) => {
+        //   const foundUser = userIds.map((found) => {
+        //     return found === user.userId;
+        //   })
+        //   return foundUser;
+        // });
+
+        // setSpecificUsers(users);
       });
   };
 
@@ -41,8 +51,8 @@ export default function App() {
           ? data.map(el => (
               <React.Fragment key={el.name}>
                 <span>{el.name}</span>
-                {el.posts.map(item => (
-                  <span>{item}</span>
+                {el.posts.map((item, index) => (
+                  <span key={index}>{item.body}</span>
                 ))}
               </React.Fragment>
             ))
