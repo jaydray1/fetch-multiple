@@ -47,16 +47,20 @@ export default function App() {
         }}
       >
         <button onClick={loadData}>Load Data</button>
-        {data
-          ? data.map(el => (
-              <React.Fragment key={el.name}>
-                <span>{el.name}</span>
-                {el.posts.map((item, index) => (
-                  <span key={index}>{item.body}</span>
-                ))}
-              </React.Fragment>
-            ))
-          : null}
+        <div>
+          {data
+            ? data.map(el => (
+                <div key={el.name}>
+                  <h3>{el.name}</h3>
+                  <p>
+                    {el.posts.map((item, index) => (
+                      <p key={index}>{item.body}</p>
+                    ))}
+                  </p>
+                </div>
+              ))
+            : null}
+        </div>
         {/* {data[1]
           ? data[1].map(el => <span key={el.body}>{el.body}</span>)
           : null} */}
