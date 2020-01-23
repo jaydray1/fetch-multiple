@@ -25,7 +25,7 @@ export default function App() {
         // setData(Object.assign({}, (result[0])));
         setData(result[0]);
         // console.log(data);
-        setMissingUsers(checkForMissingIds(result[0], userIds));
+        setMissingUsers(checkForMissingIds(result[0], userIds.current));
       });
   };
 
@@ -43,19 +43,15 @@ export default function App() {
   };
 
   const buildQuery = (baseUrl, userIds) => {
-    let appendParams = baseUrl;
-    if (userIds.length) {
-      // filteredUrl = "https://jsonplaceholder.typicode.com/users?id=1&id=5"
-      return (appendParams = userIds
-        .reduce((acc, curr) => {
-          return acc + "id=" + curr + "&";
-        }, "https://jsonplaceholder.typicode.com/users?")
-        .slice(0, 1));
-      // appendParams = appendParams.slice(0, -1);
-    } else {
-      return appendParams;
-    }
-    // console.log(appendParams);
+    let appendParams = "";
+    // console.log('inside build', baseUrl, userIds.current)
+    if (!userIds.current.length) return baseUrl;
+    appendParams = userIds.current
+      .reduce((acc, curr) => {
+        return acc + "id=" + curr + "&";
+      }, `${baseUrl}?`)
+      .slice(0, -1);
+    return appendParams;
   };
 
   return (
