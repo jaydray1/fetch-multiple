@@ -5,19 +5,14 @@ export default function App() {
   const [data, setData] = React.useState();
   // const [specificUsers, setSpecificUsers] = React.useState();
   const [missingUsers, setMissingUsers] = React.useState();
+  const groupRef = React.useRef([1, 4, 12, 32]);
 
-  const loadData = (userIds = []) => {
-    // let appendParams = '';
-    // if (userIds.length) {
-    //   // filteredUrl = "https://jsonplaceholder.typicode.com/users?id=1&id=5"
-    //   userIds.reduce((acc, curr) => {
-    //     return acc+curr+'&';
-    //   }, 'https://jsonplaceholder.typicode.com/users?')
-    // }
-    const urls = [
-      "https://jsonplaceholder.typicode.com/users?id=1&id=11",
-      "https://jsonplaceholder.typicode.com/posts"
-    ];
+  const loadData = userIds => {
+    const queryUrl = buildQuery(
+      "https://jsonplaceholder.typicode.com/users",
+      userIds
+    );
+    const urls = [queryUrl, "https://jsonplaceholder.typicode.com/posts"];
 
     Promise.all(urls.map(url => fetch(url)))
       .then(resp => Promise.all(resp.map(r => r.json())))
@@ -30,16 +25,7 @@ export default function App() {
         // setData(Object.assign({}, (result[0])));
         setData(result[0]);
         // console.log(data);
-        setMissingUsers(checkForMissingIds(result[0], [1, 11]));
-
-        // const users = data.filter((user) => {
-        //   const foundUser = userIds.map((found) => {
-        //     return found === user.userId;
-        //   })
-        //   return foundUser;
-        // });
-
-        // setSpecificUsers(users);
+        setMissingUsers(checkForMissingIds(result[0], userIds));
       });
   };
 
@@ -54,6 +40,22 @@ export default function App() {
       }
     }
     return missingIds;
+  };
+
+  const buildQuery = (baseUrl, userIds) => {
+    let appendParams = baseUrl;
+    if (userIds.length) {
+      // filteredUrl = "https://jsonplaceholder.typicode.com/users?id=1&id=5"
+      return (appendParams = userIds
+        .reduce((acc, curr) => {
+          return acc + "id=" + curr + "&";
+        }, "https://jsonplaceholder.typicode.com/users?")
+        .slice(0, 1));
+      // appendParams = appendParams.slice(0, -1);
+    } else {
+      return appendParams;
+    }
+    // console.log(appendParams);
   };
 
   return (
@@ -77,7 +79,7 @@ export default function App() {
           justifyContent: "center"
         }}
       >
-        <button onClick={loadData}>Load Data</button>
+        <button onClick={() => loadData(groupRef)}>Load Data</button>
         <div>
           {data
             ? data.map(el => (
