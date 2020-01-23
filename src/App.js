@@ -3,7 +3,7 @@ import "./styles.css";
 
 export default function App() {
   const [data, setData] = React.useState();
-  const [specificUsers, setSpecificUsers] = React.useState();
+  // const [specificUsers, setSpecificUsers] = React.useState();
 
   const loadData = (userIds = []) => {
     const urls = [
