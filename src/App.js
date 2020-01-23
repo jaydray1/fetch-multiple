@@ -88,9 +88,6 @@ export default function App() {
               ))
             : null}
         </div>
-        {/* {data[1]
-          ? data[1].map(el => <span key={el.body}>{el.body}</span>)
-          : null} */}
       </div>
     </div>
   );
