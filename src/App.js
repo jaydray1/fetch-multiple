@@ -56,7 +56,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <h1>Hello Team</h1>
+      <h1>Data Fetching</h1>
       <h2>
         Fetch users and posts, append posts on users, and fetch a specific list
         of users
@@ -76,7 +76,7 @@ export default function App() {
         }}
       >
         <button onClick={() => loadData(groupRef)}>Load Data</button>
-        <div>
+        <div className="data-cards">
           {data
             ? data.map(el => (
                 <div key={el.name}>
