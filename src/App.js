@@ -67,27 +67,21 @@ export default function App() {
             User: {item} could not be found, please check users
           </p>
         ))}
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          width: "10em",
-          justifyContent: "center"
-        }}
-      >
-        <button onClick={() => loadData(groupRef)}>Load Data</button>
-        <div className="data-cards">
-          {data
-            ? data.map(el => (
-                <div key={el.name}>
-                  <h3>{el.name}</h3>
-                  {el.posts.map((item, index) => (
+      <button onClick={() => loadData(groupRef)}>Load Data</button>
+      <div className="data-cards">
+        {data
+          ? data.map(el => (
+              <div key={el.name} className="data-card">
+                <h3>{el.name}</h3>
+                {el.posts.map((item, index) => (
+                  <div className="post-container">
                     <p key={index}>{item.body}</p>
-                  ))}
-                </div>
-              ))
-            : null}
-        </div>
+                    <div className="bottom-line" />
+                  </div>
+                ))}
+              </div>
+            ))
+          : null}
       </div>
     </div>
   );

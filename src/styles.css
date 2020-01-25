@@ -1,6 +1,12 @@
 .App {
   font-family: sans-serif;
-  text-align: center;
+  /* text-align: center; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inner-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,6 +14,7 @@
 
 button {
   height: 3em;
+  width: 10em;
   background: black;
   color: white;
   font-size: 16px;
@@ -19,4 +26,58 @@ button:hover {
   background: white;
   color: black;
   cursor: pointer;
+}
+
+.data-cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.data-card {
+  margin: 20px 0px 20px 0px;
+  width: 35em;
+  padding: 10px;
+}
+
+.post-container {
+  width: 100%;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* .post-container:nth-child(even) {
+  background-color: #ffe5dc;
+}
+
+.post-container:nth-child(odd) {
+  background-color: #fff4f1;
+} */
+
+.post-container:last-child div {
+  border: none;
+}
+
+.post-container p::first-letter {
+  text-transform: capitalize;
+}
+
+.post-container p::after {
+  content: ".";
+}
+
+.bottom-line {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 0.5px solid black;
+  width: 75%;
+}
+
+@media only screen and (max-width: 800px) {
+  .data-card {
+    width: 75%;
+  }
 }
